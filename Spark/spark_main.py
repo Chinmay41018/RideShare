@@ -143,7 +143,7 @@ def extract_info(route):
     return origin, destination, waypoints
 
 def api_call(origin, dest, waypoints):
-    api_key = 'AIzaSyCrsjtsVHryp0c57QVoN0wjBOaFXhH9oyY'
+    api_key = 'Enter Your API Key'
     gmaps = googlemaps.Client(key=api_key)
     directions_result = gmaps.directions(origin,
                                      dest,
@@ -457,7 +457,7 @@ if __name__ == "__main__":
             return origin, destination, waypoints
 
         def api_call(origin, dest, waypoints):
-            api_key = 'AIzaSyCrsjtsVHryp0c57QVoN0wjBOaFXhH9oyY'
+            api_key = 'Enter Your API Key'
             gmaps = googlemaps.Client(key=api_key)
             directions_result = gmaps.directions(origin,
                                             dest,
