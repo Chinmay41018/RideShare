@@ -1,0 +1,167 @@
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.418.0.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="req1.min.js"></script>
+<script src="req2.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+<script type="text/javascript" src="lib/url-template/url-template.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+
+
+<link rel="stylesheet" href="WebApp.css">
+<!-- <script type="text/javascript" src="aws-sdk.min.js"></script> -->
+
+
+<script type="text/javascript" src="apigClient.js"></script>
+<script type="text/javascript" src="index.js"> </script>
+
+
+<!DOCTYPE html>
+<!-- <body > -->
+<html>
+<head>
+<title>Share your Ride!</title>
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<style>
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height: 50%;
+    width: 50%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .main-window {
+    width: 310px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 0px solid white;
+    border-width: 50px 15px;
+    outline-style: solid;
+    outline-color: #45a4f0;
+    color: #474c57;
+    font-family: 'Avenir Next', Helvetica;
+    }
+
+    .button {
+      border-radius: 25px;
+      background-color: #1bbc9b; /* Green */
+      border: 1px;
+      color: white;
+      padding: 10px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      font-family: 'Avenir Next', Helvetica;
+    }
+
+    .mytext {
+      border-radius: 5px;
+      background-color: #8018E8; /* Green */
+      border: none;
+      color: white;
+    }
+
+    .input_box{
+        margin-left: 2%;
+        border-radius: 5px;
+    }
+
+    .heading_class{
+        border-radius: 5px;
+        border-width: 5px;
+        font-family: 'Times';
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+        font-size: 56px;
+    }
+
+    @import url(http://fonts.googleapis.com/css?family=Raleway:100,400,600,800);
+    *,
+    *:after,
+    *:before {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+            
+    body {
+    background: #2d3e50;
+    color: #1bbc9b;
+    font-family: 'Raleway', Helvetica, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1 id="change" style="text-align: center" class="heading_class"> Share your Ride </h1>
+<h3 id="lol" style="text-align: center">  </h3>
+<div style="display: flex; height:100%; width:100%; position:relative;top:5%">
+
+    <div id="map-wrapper" style="float:left;width:75%">
+            <div id="map" style="position:relative;width:100%;overflow:hidden;"></div>
+    <!-- <script type="text/javascript" src="index.js"> </script> -->
+
+        <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIkmisjz8Z44-nUTHVmjOo0EKfocE34JY">
+
+        </script>
+        <script type="text/javascript" src="index.js"> </script>
+        <button class="button" id="call" onclick="initMap()"> Load maps </button>
+        <br>
+        Type From Address<input type="text" id="from" class="input_box"></input>
+        <button class="button" id="f" onclick="addPinFrom()"> From </button><br>
+        Type To Address<input type="text" id="to" class="input_box"></input>
+        <button class="button" id="t" onclick="addPinTo()"> To </button><br>
+        <button class="button" id="go" onclick="LetsGo()"> Go! </button>
+    </div>
+
+    <div class="col-sm-3 col-sm-offset-7 frame" style="float:right;left:2%">
+            <ul></ul>
+            <div>
+                <div class="msj-rta macro" style="margin:auto">                        
+                    <div class="text text-r" style="background:whitesmoke !important">
+                        <input class="mytext" id="input" placeholder="Type a message"/>
+                        <!-- <script type="text/javascript" src="index.js"> </script> -->
+                        <script>checkPhoto()</script>
+                        <!-- <button id="myBtn" onclick="Chat()">Button</button> -->
+                        
+                    </div> 
+                </div>
+            </div>
+            
+    </div>     
+
+</div>
+
+
+<!-- 
+Query: <input type="text" name="fname" id="search"><br>
+<button id="submit1" onclick="search()"> Submit</button> <br> -->
+<!-- <script>search()</script> -->
+
+<!-- Upload: <input type="file" id="upload"
+       id="avatar" name="avatar"
+       accept="image/png, image/jpeg">
+
+ <button id="submit2" onclick="upload()"> Upload now! </button> <br> -->
+<!-- <script>upload()</script> -->
+
+<!--  <script src="index.js"></script> -->
+ <!-- <button id="action" onclick="handleAction()">Start recording...</button> -->
+
+<!-- <button id="speak" -->
+</body>
+</html>
